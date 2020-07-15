@@ -62,21 +62,22 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]   =   { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[]   =   { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", 
+                                      normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]        =   { "st", NULL };
 static const char *voldwncmd[]      =   { "pamixer", "--decrease", "5", NULL                };
 
 /* my commands */
-static const char *volupcmd[]       =   { "pamixer", "--increase", "5", NULL                    };
-static const char *volmutecmd[]     =   { "pamixer", "--toggle-mute", NULL                      };
-static const char *brtdwncmd[]      =   { "xbacklight", "-10", "-time", "0", NULL               };
-static const char *brtupcmd[]       =   { "xbacklight", "+10", "-time", "0", NULL               };
-static const char *nnncmd[]         =   { "st", "-e", "bash", "-i", "-c", "n", NULL             };
-static const char *ncmpcppcmd[]     =   { "st", "-e", "bash", "-i", "-c", "ncmpcpp", NULL       };
-static const char *papecmd[]        =   { "wpg", "-m", NULL                                     };
-static const char *wpgcmd[]         =   { "wpg", NULL                                           };
-static const char *ffcmd[]          =   { "firefox", NULL                                       };
-static const char *emacscmd[]       =   { "emacs", NULL                                         };
+static const char *volupcmd[]       =   { "pamixer", "--increase", "5", NULL                            };
+static const char *volmutecmd[]     =   { "pamixer", "--toggle-mute", NULL                              };
+static const char *brtdwncmd[]      =   { "xbacklight", "-10", "-time", "0", NULL                       };
+static const char *brtupcmd[]       =   { "xbacklight", "+10", "-time", "0", NULL                       };
+static const char *nnncmd[]         =   { "st", "-e", "bash", "-i", "-c", "n", NULL                     };
+static const char *ncmpcppcmd[]     =   { "st", "-e", "bash", "-i", "-c", "ncmpcpp", NULL               };
+static const char *papecmd[]        =   { "wpg", "-m", NULL                                             };
+static const char *wpgcmd[]         =   { "wpg", NULL                                                   };
+static const char *ffcmd[]          =   { "firefox", NULL                                               };
+static const char *emacscmd[]       =   { "emacsclient", "-create-frame", "--alternate-editor=''", NULL };
 
 static Key keys[] = {
 	/* modifier                     key                 function        argument */
