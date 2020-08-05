@@ -5,10 +5,10 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 0;        /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappoh    = 50;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 50;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
+static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=12" };
 static const char dmenufont[]       = "monospace:size=12";
@@ -34,7 +34,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       0,            0,           -1 },
 };
 
 /* layout(s) */
@@ -65,17 +65,15 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[]   =   { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", 
                                       normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]        =   { "st", NULL };
-static const char *voldwncmd[]      =   { "pamixer", "--decrease", "5", NULL                };
 
 /* my commands */
-static const char *volupcmd[]       =   { "pamixer", "--increase", "5", NULL                            };
-static const char *volmutecmd[]     =   { "pamixer", "--toggle-mute", NULL                              };
+static const char *voldwncmd[]      =   { "amixer", "set", "Master", "10%-", NULL                       };
+static const char *volupcmd[]       =   { "amixer", "set", "Master", "10%+", NULL                       };
+static const char *volmutecmd[]     =   { "amixer", "set", "Master", "toggle", NULL                     };
 static const char *brtdwncmd[]      =   { "xbacklight", "-10", "-time", "0", NULL                       };
 static const char *brtupcmd[]       =   { "xbacklight", "+10", "-time", "0", NULL                       };
-static const char *nnncmd[]         =   { "st", "-e", "bash", "-i", "-c", "n", NULL                     };
+static const char *nnncmd[]         =   { "st", "-e", "bash", "-i", "-c", "nnn -e", NULL                };
 static const char *ncmpcppcmd[]     =   { "st", "-e", "bash", "-i", "-c", "ncmpcpp", NULL               };
-static const char *papecmd[]        =   { "wpg", "-m", NULL                                             };
-static const char *wpgcmd[]         =   { "wpg", NULL                                                   };
 static const char *ffcmd[]          =   { "firefox", NULL                                               };
 static const char *emacscmd[]       =   { "emacsclient", "-create-frame", "--alternate-editor=''", NULL };
 
@@ -96,7 +94,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,               setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,               setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,               setlayout,      {.v = &layouts[2]} },
-/*	{ MODKEY,                       XK_space,           setlayout,      {0} }, */
+	{ MODKEY,                       XK_space,           setlayout,      {0} }, 
 	{ MODKEY|ShiftMask,             XK_space,           togglefloating, {0} },
 	{ MODKEY,                       XK_0,               view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,               tag,            {.ui = ~0 } },
@@ -139,8 +137,6 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_bracketright,    spawn,          {.v = brtupcmd } }, 
     { MODKEY,                       XK_n,               spawn,          {.v = nnncmd } }, 
     { MODKEY,                       XK_r,               spawn,          {.v = ncmpcppcmd } }, 
-    { MODKEY,                       XK_slash,           spawn,          {.v = papecmd } }, 
-    { MODKEY,                       XK_u,               spawn,          {.v = wpgcmd } }, 
     { MODKEY,                       XK_o,               spawn,          {.v = ffcmd } }, 
     { MODKEY,                       XK_e,               spawn,          {.v = emacscmd } }, 
 
