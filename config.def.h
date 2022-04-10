@@ -70,12 +70,13 @@ static const char *termcmd[]        =   { "st", NULL };
 static const char *voldwncmd[]      =   { "amixer", "set", "Master", "10-", NULL                        };
 static const char *volupcmd[]       =   { "amixer", "set", "Master", "10+", NULL                        };
 static const char *volmutecmd[]     =   { "amixer", "set", "Master", "toggle", NULL                     };
-static const char *brtdwncmd[]      =   { "xbacklight", "-10", "-time", "0", NULL                       };
-static const char *brtupcmd[]       =   { "xbacklight", "+10", "-time", "0", NULL                       };
+static const char *brtdwncmd[]      =   { "light", "-U", "10",               NULL                       };
+static const char *brtupcmd[]       =   { "light", "-A", "10",               NULL                       };
 static const char *nnncmd[]         =   { "st", "-e", "bash", "-i", "-c", "nnn -e", NULL                };
 static const char *ncmpcppcmd[]     =   { "st", "-e", "bash", "-i", "-c", "ncmpcpp", NULL               };
 static const char *ffcmd[]          =   { "firefox", NULL                                               };
 static const char *emacscmd[]       =   { "emacs", NULL                                                 };
+static const char *screenshotcmd[]  =   { "import", "screenshot.jpg", NULL                              };
 
 static Key keys[] = {
 	/* modifier                     key                 function        argument */
@@ -139,6 +140,8 @@ static Key keys[] = {
     { MODKEY,                       XK_r,               spawn,          {.v = ncmpcppcmd } }, 
     { MODKEY,                       XK_o,               spawn,          {.v = ffcmd } }, 
     { MODKEY,                       XK_e,               spawn,          {.v = emacscmd } }, 
+    { MODKEY|ShiftMask,             XK_j,               spawn,          {.v = screenshotcmd } },
+
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
